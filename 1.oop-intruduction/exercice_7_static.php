@@ -2,16 +2,12 @@
 
 declare(strict_types=1);
 
-// EXERCISE 6
+// EXERCISE 7
 
-// Copy the classes of exercise 2.
-// TODO: Change the properties to private.
-// TODO: Make a const barname with the value 'Het Vervolg'.
-// TODO: Print the constant on the screen.
-// TODO: Create a function in beverage and use the constant.
-// TODO: Do the same in the beer class.
-// TODO: Print the output of these functions on the screen.
-// TODO: Make sure that every print is on a new line.
+// Copy your solution from exercise 6
+// TODO: Make a static property in the Beverage class that can only be accessed from inside the class called address which has the value "Melkmarkt 9, 2000 Antwerpen".
+// TODO: Print the address without creating a new instant of the beverage class 2 times in two different ways.
+
 
 
 // Définition de la classe Beverage
@@ -21,13 +17,15 @@ class Beverage
     private string $name;
     private string $color;
     private float $price;
+    private string $adress;
     private string $temperature;
+
 
     // Définition de la constante BAR_NAME avec la valeur 'Het Vervolg'
     const BAR_NAME = 'Het Vervolg';
 
     // Constructeur de la classe Beverage
-    public function __construct(string $name, string $color, float $price, string $temperature = "cold")
+    public function __construct(string $name, string $color, float $price, string $adress, string $temperature = "cold")
     {
         // Initialisation de la propriété name avec la valeur passée en paramètre
         $this->name = $name;
@@ -35,6 +33,8 @@ class Beverage
         $this->color = $color;
         // Initialisation de la propriété price avec la valeur passée en paramètre
         $this->price = $price;
+        // Initialisation de la propriété adress avec la valeur passée en paramètre
+        $this->adress = $adress;
         // Initialisation de la propriété temperature avec la valeur passée en paramètre
         $this->temperature = $temperature;
     }
@@ -43,6 +43,10 @@ class Beverage
     {
         // Retourne la valeur de la constante BAR_NAME
         return self::BAR_NAME;
+    }
+    public function getAdress()
+    {
+        return $this->adress;
     }
 }
 
@@ -53,10 +57,10 @@ class Beer extends Beverage
     private float $alcoholPercentage;
 
     // Constructeur de la classe Beer
-    public function __construct(string $name, float $alcoholPercentage, string $color, float $price)
+    public function __construct(string $name, float $alcoholPercentage, string $color, float $price, string $adress)
     {
         // Appel du constructeur de la classe parente (Beverage)
-        parent::__construct($name, $color, $price);
+        parent::__construct($name, $color, $price, $adress);
 
         // Initialisation de la propriété alcoholPercentage avec la valeur passée en paramètre
         $this->alcoholPercentage = $alcoholPercentage;
@@ -71,22 +75,9 @@ class Beer extends Beverage
 }
 
 // Créer une instance de Beverage
-$beverage = new Beverage('Some Name', 'Some Color', 2.5);
+$beverage = new Beverage('Some Name', 'Some Color', 2.5, 'Melkmarkt 9, 2000 Anvers');
 
-// Affichage de la constante BAR_NAME directement
+
 echo '<pre>';
-echo Beverage::BAR_NAME;
-echo '</pre>';
-
-// Afficher la valeur de la constante en utilisant la méthode getBarName de la classe Beverage
-echo '<pre>';
-echo $beverage->getBarName();
-echo '</pre>';
-
-// Créer une instance de Beer
-$beer = new Beer('Duvel', 8.5, 'Blond', 3.5);
-
-// Afficher la valeur de la constante en utilisant la méthode getBarName de la classe Beer
-echo '<pre>';
-echo $beer->getBarName();
+echo $beverage->getAdress();
 echo '</pre>';
