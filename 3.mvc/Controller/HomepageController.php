@@ -1,6 +1,8 @@
 <?php
 
 declare(strict_types=1);
+
+namespace App\Controller;
 //Le contrôleur HomepageController gère la page d'accueil.
 class HomepageController
 {

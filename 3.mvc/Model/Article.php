@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Model;
+
 //La classe Article définit la structure d'un article avec des propriétés comme le titre, la description et la date de publication.
 class Article
 {

@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+namespace App\Controller;
+
+use PDO;
+use Exception;
+use App\Model\Article;
 
 //Le contrôleur ArticleController gère les actions liées aux articles, telles que l'affichage de la liste des articles (index) et l'affichage détaillé d'un article (show).
 class ArticleController
@@ -44,7 +49,7 @@ class ArticleController
 
         return $articles;
     }
-    //La méthode show affiche les détails d'un article particulier.
+    //La méthode show affiche les détails d'un article via son ID.
     public function show($articleId)
     {
         // Récupérer tous les articles
