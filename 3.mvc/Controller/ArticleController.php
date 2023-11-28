@@ -27,11 +27,21 @@ class ArticleController
     private function getArticles()
     {
         // TODO: prepare the database connection
-        try {
-            $bdd = new PDO('mysql:host=' . $_ENV["HOST"] . ';dbname=' . $_ENV["DBNAME"] . ';charset=utf8', $_ENV["USER"], $_ENV["PASSWORD"]);
-            $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
+
+        //appeler la focntion connectDB pour établir la connexion à la db
+        $bdd = connectDB();
+        //fonction pour établir la connexion
+        function connectDB()
+        {
+            try {
+                //créer une nouvelle instance de PDOO pour la connexion à la db
+                $bdd = new PDO('mysql:host=' . $_ENV["HOST"] . ';dbname=' . $_ENV["DBNAME"] . ';charset=utf8', $_ENV["USER"], $_ENV["PASSWORD"]);
+                //retourner l'objet PDO resprésentant la connexion à la db
+                return $bdd;
+            } catch (Exception $e) {
+                //en cas d'erreur, afficher un message d'erreur ry arrêter l'exécution du script 
+                die('Erreur : ' . $e->getMessage());
+            }
         }
         // Note: you might want to use a re-usable databaseManager class - the choice is yours
         // TODO: fetch all articles as $rawArticles (as a simple array)

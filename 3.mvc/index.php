@@ -8,7 +8,9 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 
-require_once '.\vendor\autoload.php';
+require_once 'vendor\autoload.php';
+//charger les varaibales d'envirronement à partir du fichier .env dans le répertoire courant
+Dotenv\Dotenv::createUnsafeImmutable(__DIR__)->load();
 // include all your model files here
 // require 'Model/Article.php';
 // //include all your controllers here
