@@ -21,12 +21,14 @@ class ArticleController
         require 'View/articles/index.php';
     }
 
+
+
     // Note: this function can also be used in a repository - the choice is yours
     private function getArticles()
     {
         // TODO: prepare the database connection
         try {
-            $bdd = new PDO('mysql:host=localhost;dbname=mvc;charset=utf8', 'root');
+            $bdd = new PDO('mysql:host=' . $_ENV["HOST"] . ';dbname=' . $_ENV["DBNAME"] . ';charset=utf8', $_ENV["USER"], $_ENV["PASSWORD"]);
             $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
@@ -49,6 +51,26 @@ class ArticleController
 
         return $articles;
     }
+
+
+
+    // Méthode pour récupérer un article par son identifiant dans un tableau
+    private function getArticleById($articleId, $articles)
+    {
+        // Parcours du tableau d'articles
+        foreach ($articles as $article) {
+            // Vérification si l'identifiant de l'article correspond à l'identifiant recherché
+            if ($article->id == $articleId) {
+                // Retourne l'article trouvé
+                return $article;
+            }
+        }
+        // Retourne null si l'article n'est pas trouvé
+        return null;
+    }
+
+
+
     //La méthode show affiche les détails d'un article via son ID.
     public function show($articleId)
     {
@@ -72,6 +94,8 @@ class ArticleController
         require 'View/articles/show.php';
     }
 
+
+
     // Méthode pour récupérer l'ID de l'article précédent
     private function getPreviousArticleId($currentArticleId, $articles)
     {
@@ -86,6 +110,8 @@ class ArticleController
         return null;
     }
 
+
+
     // Méthode pour récupérer l'ID de l'article suivant
     private function getNextArticleId($currentArticleId, $articles)
     {
@@ -97,21 +123,6 @@ class ArticleController
             return $articles[$index + 1]->id;
         }
         // Retourne null si l'article actuel est le dernier dans le tableau ou n'est pas trouvé
-        return null;
-    }
-
-    // Méthode pour récupérer un article par son identifiant dans un tableau
-    private function getArticleById($articleId, $articles)
-    {
-        // Parcours du tableau d'articles
-        foreach ($articles as $article) {
-            // Vérification si l'identifiant de l'article correspond à l'identifiant recherché
-            if ($article->id == $articleId) {
-                // Retourne l'article trouvé
-                return $article;
-            }
-        }
-        // Retourne null si l'article n'est pas trouvé
         return null;
     }
 }

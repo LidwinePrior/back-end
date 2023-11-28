@@ -38,7 +38,7 @@ switch ($page) {
         // Si la page demandée est 'articles-show'
     case 'articles-show':
         // Vérifiez si un identifiant d'article est passé en paramètre dans l'URL
-        $articleID = $_GEt['id'] ?? null;
+        $articleID = $_GET['id'] ?? null;
         // Vérifiez si l'identifiant d'article est valide
         if ($articleID !== null && is_numeric($articleID)) {
             // Instanciation du contrôleur ArticleController et appel de sa méthode show avec l'identifiant d'article
